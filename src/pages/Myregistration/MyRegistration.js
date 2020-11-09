@@ -8,19 +8,19 @@ export default function MyRegistration() {
   const [myEvents, setMyEvents] = useState([]);
   const user = localStorage.getItem("user");
 
-  useEffect(() => {
-    getMyEvents();
-  }, []);
+  // useEffect(() => {
+  //   getMyEvents();
+  // }, []);
 
   const getMyEvents = async () => {
     try {
       const response = await api.get("/registration", { headers: { user } });
-      //console.log(response.data);
       setMyEvents(response.data);
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(getMyEvents, [])
 
   const isApproved = (approved) =>
     approved === true ? "Approved" : "Rejected";

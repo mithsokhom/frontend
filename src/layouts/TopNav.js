@@ -9,7 +9,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { UserContext } from "../user-context";
-import Header from "./navbar";
 
 const TopNav = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
@@ -30,10 +29,14 @@ const TopNav = () => {
         <Collapse isOpen={!collapsed} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <Link to="/events" className="mr-4">Events</Link>
+              <Link to="/events" className="mr-4">
+                Events
+              </Link>
             </NavItem>
             <NavItem>
-              <Link to="/" className="mr-4">Dashboard</Link>
+              <Link to="/" className="mr-4">
+                Dashboard
+              </Link>
             </NavItem>
             <NavItem>
               <Link to="/registration">My Registrations</Link>
@@ -45,8 +48,7 @@ const TopNav = () => {
         </Collapse>
       </Navbar>
     </div>
-  ) : (
-    <Header />
+  ) : ( ""
   );
 };
 

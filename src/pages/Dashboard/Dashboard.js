@@ -13,8 +13,7 @@ import {
 import moment from "moment";
 import socketio from "socket.io-client";
 import "./Dashboard.css";
-//www.youtube.com/watch?v=prOC9Px4wtg&list=PLqrQf0z-Hg7jD3ASYy9febJhQoUbzC8kb&index=11
-//dashboard will show all the events
+
 export default function Dashboard({ history }) {
   const [events, setEvents] = useState([]);
   const user = localStorage.getItem("user");
@@ -30,9 +29,9 @@ export default function Dashboard({ history }) {
 
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
-  useEffect(() => {
-    getEvents();
-  }, []);
+  // useEffect(() => {
+  //   getEvents();
+  // }, []);
 
   const socket = useMemo(
     () => socketio("http://localhost:5000", { query: { user: user_id } }),
@@ -71,6 +70,8 @@ export default function Dashboard({ history }) {
       history.push("/login");
     }
   };
+
+  useEffect(getEvents, [])
 
   const deleteEventHandler = async (eventId) => {
     try {

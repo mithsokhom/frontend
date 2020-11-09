@@ -15,22 +15,24 @@ export default function Register({ history }) {
 
   const submit = async (evt) => {
     evt.preventDefault();
-    if (
-      email !== "" &&
-      password !== "" &&
-      firstname !== "" &&
-      lastname !== ""
-    ) {
-      const response = await api.post("/user/register", {
-        email,
-        password,
-        firstname,
-        lastname,
-      });
-      const user = response.data.user || false;
-      const user_id = response.data.user_id || false;
+    const response = await api.post("/user/register", {
+      email,
+      password,
+      firstname,
+      lastname,
+    });
+    const user_id = response.data.user_id || false;
+    const user = response.data.user || false;
 
-      if (user && user_id) {
+    try {
+      if (
+        email !== "" &&
+        password !== "" &&
+        firstname !== "" &&
+        lastname !== "" &&
+        user &&
+        user_id
+      ) {
         localStorage.setItem("user", user);
         localStorage.setItem("user_id", user_id);
         setIsLoggedIn(true);
@@ -41,16 +43,12 @@ export default function Register({ history }) {
         setErrorMessage(message);
         setTimeout(() => {
           setError(false);
-          setErrorMessage(message);
-        }, 2000);
+          setErrorMessage("");
+        }, 3000);
       }
-    } else {
+    } catch (error) {
       setError(true);
-      setErrorMessage("You need to fill all the fields");
-      setTimeout(() => {
-        setError(false);
-        setErrorMessage("");
-      }, 2000);
+      setErrorMessage(error);
     }
   };
 

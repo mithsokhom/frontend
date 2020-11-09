@@ -26,17 +26,18 @@ export default function Event({ history }) {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [dropdownOpen, setOpen] = useState(false);
-  const user = localStorage.getItem('user');
-  
-  useEffect(()=> {
-    if(!user) history.push('/login');
-  }, [])
+  const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (!user) history.push("/login");
+  }, [user]);
+
   const toggle = () => setOpen(!dropdownOpen);
-  
+
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
   }, [thumbnail]);
-  
+
   const submit = async (evt) => {
     evt.preventDefault();
     const eventData = new FormData();
@@ -59,7 +60,7 @@ export default function Event({ history }) {
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
-          history.push("/")
+          history.push("/");
         }, 2000);
       } else {
         setError(true);
@@ -172,7 +173,11 @@ export default function Event({ history }) {
           />
         </FormGroup>
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <ButtonDropdown isOpen={dropdownOpen} toggle={toggle} className="mb-4">
+          <ButtonDropdown
+            isOpen={dropdownOpen}
+            toggle={toggle}
+            className="mb-4"
+          >
             <Button id="caret" color="warning" value={sport} disabled>
               {sport}
             </Button>
@@ -195,10 +200,7 @@ export default function Event({ history }) {
             Create Event
           </Button>
           <br />
-          <Button
-            onClick={() => history.push("/")}
-            className="btn btn-info"
-          >
+          <Button onClick={() => history.push("/")} className="btn btn-info">
             Cancel
           </Button>
         </FormGroup>
