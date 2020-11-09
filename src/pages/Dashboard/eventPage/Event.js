@@ -28,9 +28,9 @@ export default function Event({ history }) {
   const [dropdownOpen, setOpen] = useState(false);
   const user = localStorage.getItem("user");
 
-  useEffect(() => {
-    if (!user) history.push("/login");
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) history.push("/login");
+  // }, [user]);
 
   const toggle = () => setOpen(!dropdownOpen);
 
@@ -111,7 +111,7 @@ export default function Event({ history }) {
             <img
               src={cameraIcon}
               style={{ maxWidth: "50px" }}
-              alt="upload icon image"
+              alt="upload icon"
             />
           </Label>
         </FormGroup>
